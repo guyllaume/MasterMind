@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="416.0" prefWidth="750.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="416.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.projet2mastermind.LoginController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -26,7 +26,7 @@
       <Label text="Mot de passe" GridPane.columnIndex="1" GridPane.rowIndex="2" />
       <Label text="Bienvenue" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" />
       <TextField fx:id="username_txt" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-      <Button fx:id="login_btn" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Loguer" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+      <Button fx:id="login_btn" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#LoginButtonClick" text="Loguer" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
       <PasswordField fx:id="password_txt" GridPane.columnIndex="2" GridPane.rowIndex="2" />
    </children>
 </GridPane>
