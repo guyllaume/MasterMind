@@ -25,7 +25,7 @@
               <menus>
                 <Menu mnemonicParsing="false" text="Partie">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Nouvelle Ctrl+N" />
+                    <MenuItem mnemonicParsing="false" onAction="#enableGame" text="Nouvelle Ctrl+N" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Statistiques">
@@ -35,7 +35,7 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Aide">
                   <items>
-                    <MenuItem mnemonicParsing="false" onAction="#openHelpStageEvent" text="Règles Ctrl+F" />
+                    <MenuItem mnemonicParsing="false" text="Règles Ctrl+F" />
                   </items>
                 </Menu>
               </menus>
@@ -62,12 +62,12 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Circle fill="Blue" radius="14.0" stroke="BLACK" strokeType="INSIDE" GridPane.halignment="CENTER" />
-                        <Circle fill="Orange" radius="14.0" stroke="BLACK" strokeType="INSIDE" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                        <Circle fill="Green" radius="14.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
-                        <Circle fill="Yellow" radius="14.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                        <Circle fill="RED" radius="14.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
-                        <Circle fill="PURPLE" radius="14.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                        <Circle fx:id="blueCircle" fill="Blue" radius="14.0" stroke="BLACK" strokeType="INSIDE" GridPane.halignment="CENTER" />
+                        <Circle fx:id="orangeCircle" fill="Orange" radius="14.0" stroke="BLACK" strokeType="INSIDE" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                        <Circle fx:id="greenCircle" fill="Green" radius="14.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+                        <Circle fx:id="yellowCircle" fill="Yellow" radius="14.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                        <Circle fx:id="redCircle" fill="RED" radius="14.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
+                        <Circle fx:id="purpleCircle" fill="PURPLE" radius="14.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
                   <Label text="asdasd" GridPane.columnIndex="1" GridPane.rowIndex="1">
@@ -87,11 +87,11 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Valider Choix" />
-                        <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Effacer Choix" GridPane.rowIndex="1" />
+                        <Button fx:id="validerChoix_btn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Valider Choix" />
+                        <Button fx:id="effacerChoix_btn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Effacer Choix" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
-                  <TextField maxHeight="1.7976931348623157E308" GridPane.rowIndex="1" />
+                  <TextField alignment="TOP_LEFT" editable="false" maxHeight="1.7976931348623157E308" GridPane.rowIndex="1" />
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
                         <Circle fill="#c6c6c6" radius="29.0" stroke="#a1a1a1" strokeType="INSIDE" strokeWidth="0.5">
