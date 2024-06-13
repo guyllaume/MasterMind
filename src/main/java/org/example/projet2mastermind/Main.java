@@ -53,10 +53,6 @@ public class Main extends Application {
         /*loginController = fxmlLoaderLogin.getController();
         loginController.setMainApp(this);*/
 
-        //Chargement du controller help pour le helpstage (TODO)
-        /*gameController = fxmlLoaderGame.getController();
-        gameController.setMainApp(this);*/
-
         //MainStage settings
         mainStage.setTitle("Login");
         mainStage.setScene(loginScene);
