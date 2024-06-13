@@ -8,6 +8,7 @@ public class GameController {
     private Scene gameScene;
     public void setGameScene(Scene gameScene) {
         this.gameScene = gameScene;
+        setupKeyEventHandlers();
     }
 
     public void setMainApp(Main mainApp) {
