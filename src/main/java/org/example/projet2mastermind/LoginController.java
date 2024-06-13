@@ -12,6 +12,10 @@ public class LoginController {
     private TextField username_txt;
     @FXML
     private PasswordField password_txt;
+    private Main mainApp;
+    public void setMainApp(Main mainApp) {
+        this.mainApp = mainApp;
+    }
     @FXML
     public void LoginButtonClick(){
         String username = username_txt.getText();
@@ -29,6 +33,7 @@ public class LoginController {
                 infoAlert.setTitle("Login Réussi");
                 infoAlert.setHeaderText("Redirection vers le jeu...");
                 infoAlert.showAndWait();
+                mainApp.switchToGameScene();
             }
         }catch (IllegalArgumentException e){
             Alert error = new Alert(Alert.AlertType.ERROR);
