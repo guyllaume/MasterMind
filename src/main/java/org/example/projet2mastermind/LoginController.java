@@ -33,6 +33,7 @@ public class LoginController {
                 infoAlert.setTitle("Login Réussi");
                 infoAlert.setHeaderText("Redirection vers le jeu...");
                 infoAlert.showAndWait();
+                mainApp.setUsager(usager);
                 mainApp.switchToGameScene();
             }
         }catch (IllegalArgumentException e){

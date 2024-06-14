@@ -7,7 +7,6 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -35,7 +34,7 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Aide">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Règles Ctrl+F" />
+                    <MenuItem mnemonicParsing="false" onAction="#openHelpStageEvent" text="Règles Ctrl+F" />
                   </items>
                 </Menu>
               </menus>
@@ -70,7 +69,7 @@
                         <Circle fx:id="purpleCircle" fill="PURPLE" radius="14.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
-                  <Label text="asdasd" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <Label fx:id="nickname_lbl" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <font>
                         <Font name="Arial" size="18.0" />
                      </font>
@@ -87,38 +86,38 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Button fx:id="validerChoix_btn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Valider Choix" />
-                        <Button fx:id="effacerChoix_btn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Effacer Choix" GridPane.rowIndex="1" />
+                        <Button fx:id="validerChoix_btn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#setValiderChoix_btnEvent" text="Valider Choix" />
+                        <Button fx:id="effacerChoix_btn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#resetCerclesChoisis" text="Effacer Choix" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
-                  <TextField alignment="TOP_LEFT" editable="false" maxHeight="1.7976931348623157E308" GridPane.rowIndex="1" />
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Circle fill="#c6c6c6" radius="29.0" stroke="#a1a1a1" strokeType="INSIDE" strokeWidth="0.5">
+                        <Circle fx:id="cercleChoisi1" fill="#c6c6c6" radius="29.0" stroke="#a1a1a1" strokeType="INSIDE" strokeWidth="0.5">
                            <HBox.margin>
                               <Insets left="2.0" right="2.0" />
                            </HBox.margin>
                         </Circle>
-                        <Circle fill="#c6c6c6" radius="29.0" stroke="#a1a1a1" strokeType="INSIDE" strokeWidth="0.5">
+                        <Circle fx:id="cercleChoisi2" fill="#c6c6c6" radius="29.0" stroke="#a1a1a1" strokeType="INSIDE" strokeWidth="0.5">
                            <HBox.margin>
                               <Insets left="2.0" right="2.0" />
                            </HBox.margin>
                         </Circle>
-                        <Circle fill="#c6c6c6" radius="29.0" stroke="#a1a1a1" strokeType="INSIDE" strokeWidth="0.5">
+                        <Circle fx:id="cercleChoisi3" fill="#c6c6c6" radius="29.0" stroke="#a1a1a1" strokeType="INSIDE" strokeWidth="0.5">
                            <HBox.margin>
                               <Insets left="2.0" right="2.0" />
                            </HBox.margin>
                         </Circle>
-                        <Circle fill="#c6c6c6" radius="29.0" stroke="#a1a1a1" strokeType="INSIDE" strokeWidth="0.5">
+                        <Circle fx:id="cercleChoisi4" fill="#c6c6c6" radius="29.0" stroke="#a1a1a1" strokeType="INSIDE" strokeWidth="0.5">
                            <HBox.margin>
                               <Insets left="2.0" right="2.0" />
                            </HBox.margin>
                         </Circle>
                      </children>
                   </HBox>
+                  <TextArea fx:id="affichageEssai_txa" editable="false" prefHeight="200.0" prefWidth="200.0" wrapText="true" GridPane.rowIndex="1" />
                </children>
             </GridPane>
-            <TextArea editable="false" prefHeight="200.0" prefWidth="200.0">
+            <TextArea fx:id="affichageLog_txa" editable="false" prefHeight="200.0" prefWidth="200.0">
                <VBox.margin>
                   <Insets />
                </VBox.margin>

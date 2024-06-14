@@ -3,17 +3,25 @@ package org.example.projet2mastermind;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 
 public class GameController {
     private Main mainApp;
     private Scene gameScene;
     @FXML
+    private Label nickname_lbl;
+    @FXML
     private Button validerChoix_btn;
     @FXML
     private Button effacerChoix_btn;
+    @FXML
+    private TextArea affichageEssai_txa;
+    @FXML
+    private TextArea affichageLog_txa;
     @FXML
     private Circle blueCircle;
     @FXML
@@ -26,15 +34,30 @@ public class GameController {
     private Circle yellowCircle;
     @FXML
     private Circle purpleCircle;
-    private Circle[] cercles;
-    private boolean isGameInProgress;
+    @FXML
+    private Circle cercleChoisi1;
+    @FXML
+    private Circle cercleChoisi2;
+    @FXML
+    private Circle cercleChoisi3;
+    @FXML
+    private Circle cercleChoisi4;
+    private Circle[] cerclesPossibles;
+    private Circle[] cerclesChoisis;
+    private GameMaster gameMaster;
+    private boolean isGameInProgress; // will probably not use
     @FXML
     public void initialize() {
-        cercles = new Circle[]{blueCircle, greenCircle, redCircle, orangeCircle, yellowCircle, purpleCircle};
+        cerclesPossibles = new Circle[]{blueCircle, greenCircle, redCircle, orangeCircle, yellowCircle, purpleCircle};
+        cerclesChoisis = new Circle[]{cercleChoisi1, cercleChoisi2, cercleChoisi3, cercleChoisi4};
         disableGame();
-        for (Circle cercle : cercles) {
+        for (Circle cercle : cerclesPossibles) {
             setHoverCursor(cercle);
+            setClickCircle(cercle);
         }
+    }
+    public void setNickname(){
+        nickname_lbl.setText(mainApp.getUsager().getNick());
     }
     public void setGameScene(Scene gameScene) {
         this.gameScene = gameScene;
@@ -63,21 +86,87 @@ public class GameController {
         cercle.setOnMouseEntered(event -> cercle.setCursor(Cursor.HAND));
         cercle.setOnMouseExited(event -> cercle.setCursor(Cursor.DEFAULT));
     }
+    public void setClickCircle(Circle cercle){
+        cercle.setOnMouseClicked(event -> {
+            for (Circle cercleChoisi : cerclesChoisis) {
+                if (!cercleChoisi.getFill().equals(Color.valueOf("#c6c6c6"))) { continue;}
+                cercleChoisi.setFill(cercle.getFill());
+                break;
+            }
+        });
+    }
+
+    public void setValiderChoix_btnEvent(){
+        for (Circle cercle : cerclesChoisis) {
+            if (cercle.getFill().equals(Color.valueOf("#c6c6c6"))) {
+                Alert error = new Alert(Alert.AlertType.ERROR);
+                error.setTitle("Erreur");
+                error.setHeaderText("Veuillez choisir 4 couleurs avant de valider");
+                error.showAndWait();
+                return;
+            }
+        }
+        Color[] couleursChoisies = new Color[]{(Color) cerclesChoisis[0].getFill(), (Color) cerclesChoisis[1].getFill(), (Color) cerclesChoisis[2].getFill(), (Color) cerclesChoisis[3].getFill()};
+        gameMaster.nouvelleEssai(couleursChoisies);
+        String[] nomCouleur = getNomCouleur(couleursChoisies);
+        affichageEssai_txa.setText(affichageEssai_txa.getText() + "Essai " + gameMaster.getNbEssai() + " " +
+                nomCouleur[0] + " " + nomCouleur[1] + " " + nomCouleur[2] + " " + nomCouleur[3] +
+                " Noir:" + gameMaster.getBlack() + " Blanc:" + gameMaster.getWhite() + " Points:" + gameMaster.getNbPoints() + "\n");
+        affichageLog_txa.setText(affichageLog_txa.getText() + "Vous perdez 1 point(s) pour la ligne" + gameMaster.getNbEssai() +
+                " et gagnez " + gameMaster.getNbPointsGagnésParEssai() + "point(s) Total de point(s):" + gameMaster.getNbPoints() + "\n" +
+                "Il reste " + gameMaster.getNbEssaiRestants() + " coups\n");
+
+        if (gameMaster.isGameWon()){
+            affichageEssai_txa.setText(affichageEssai_txa.getText() + " Points pour la résolution:" + gameMaster.getNbPoints());
+            affichageLog_txa.setText(affichageLog_txa.getText() + "Vous avez 10 point(s) pour la résolution et vous gagnez avec " + gameMaster.getNbPoints() + " point(s)\n");
+            disableGame();
+        }
+        if (gameMaster.isGameLost()){
+            nomCouleur = getNomCouleur(gameMaster.getColors());
+            affichageEssai_txa.setText(affichageEssai_txa.getText() + "Voici la combinaison secrète:" + nomCouleur[0] + " " + nomCouleur[1] + " " + nomCouleur[2] + " " + nomCouleur[3]);
+            affichageLog_txa.setText(affichageLog_txa.getText() + "Vous avez perdu et vous gagnez 0 point(s)\n");
+            disableGame();
+        }
+
+        affichageEssai_txa.setScrollTop(Double.MAX_VALUE);
+        affichageLog_txa.setScrollTop(Double.MAX_VALUE);
+        resetCerclesChoisis();
+    }
+    public String[] getNomCouleur(Color[] couleursChoisies){
+        String[] nomCouleur = new String[4];
+        for (int i = 0; i < 4; i++) {
+            if(couleursChoisies[i] == Color.BLUE) nomCouleur[i] = "Bleu";
+            else if(couleursChoisies[i] == Color.GREEN) nomCouleur[i] = "Vert";
+            else if(couleursChoisies[i] == Color.RED) nomCouleur[i] = "Rouge";
+            else if(couleursChoisies[i] == Color.ORANGE) nomCouleur[i] = "Orange";
+            else if(couleursChoisies[i] == Color.YELLOW) nomCouleur[i] = "Jaune";
+            else if(couleursChoisies[i] == Color.PURPLE) nomCouleur[i] = "Violet";
+        }
+        return nomCouleur;
+    }
 
     public void disableGame(){
         isGameInProgress = false;
         validerChoix_btn.setDisable(true);
         effacerChoix_btn.setDisable(true);
-        for (Circle cercle : cercles) {
+        for (Circle cercle : cerclesPossibles) {
             cercle.setDisable(true);
         }
+        resetCerclesChoisis();
     }
     public void enableGame(){
         isGameInProgress = true;
+        gameMaster = new GameMaster();
         validerChoix_btn.setDisable(false);
         effacerChoix_btn.setDisable(false);
-        for (Circle cercle : cercles) {
+        affichageEssai_txa.setText("");
+        for (Circle cercle : cerclesPossibles) {
             cercle.setDisable(false);
+        }
+    }
+    public void resetCerclesChoisis(){
+        for (Circle cercle : cerclesChoisis) {
+            cercle.setFill(Color.valueOf("#c6c6c6"));
         }
     }
 }

@@ -20,6 +20,7 @@ public class Main extends Application {
     private Scene gameScene;
     private LoginController loginController;
     private GameController gameController;
+    private UsagerModel usager;
     @Override
     public void start(Stage mainStage) throws IOException {
         //Initialisation de la DB
@@ -68,10 +69,17 @@ public class Main extends Application {
         statsStage.setTitle("Stats");
         statsStage.setScene(statsScene);
     }
+    public UsagerModel getUsager() {
+        return usager;
+    }
+    public void setUsager(UsagerModel usager) {
+        this.usager = usager;
+    }
 
     public void switchToGameScene() {
         mainStage.setScene(gameScene);
         mainStage.setTitle("MasterMind");
+        gameController.setNickname();
     }
 
     public void showHelpStage() {
