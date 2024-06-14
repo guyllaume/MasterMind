@@ -71,6 +71,9 @@ public class GameController {
     public void openHelpStageEvent() {
         mainApp.showHelpStage();
     }
+    public void openStatsStageEvent() {
+        mainApp.showStatsStage();
+    }
     private void setupKeyEventHandlers() {
         gameScene.setOnKeyPressed(event -> {
             if (event.isControlDown() && event.getCode() == KeyCode.F) {
@@ -78,6 +81,9 @@ public class GameController {
             }
             if (event.isControlDown() && event.getCode() == KeyCode.N) {
                 enableGame();
+            }
+            if (event.isControlDown() && event.getCode() == KeyCode.V) {
+                openStatsStageEvent();
             }
         });
     }
@@ -131,6 +137,9 @@ public class GameController {
         affichageEssai_txa.setScrollTop(Double.MAX_VALUE);
         affichageLog_txa.setScrollTop(Double.MAX_VALUE);
         resetCerclesChoisis();
+
+        StatsModel stats = new StatsModel(mainApp.getUsager().getId(),gameMaster.getNbEssai(),couleursChoisies,gameMaster.getBlack(),gameMaster.getWhite(),gameMaster.getNbPoints());
+        new StatsDAO().insertStats(stats);
     }
     public String[] getNomCouleur(Color[] couleursChoisies){
         String[] nomCouleur = new String[4];

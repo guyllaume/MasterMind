@@ -4,20 +4,19 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.BorderPane?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="513.0" prefWidth="898.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="513.0" prefWidth="898.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.projet2mastermind.StatsController">
    <center>
-      <TableView prefHeight="200.0" prefWidth="924.0" BorderPane.alignment="CENTER">
+      <TableView fx:id="statsTable" prefHeight="200.0" prefWidth="924.0" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn prefWidth="100.0" text="userId" />
-          <TableColumn prefWidth="100.0" text="essai" />
-            <TableColumn prefWidth="100.0" text="couleur1" />
-            <TableColumn prefWidth="100.0" text="couleur2" />
-            <TableColumn prefWidth="100.0" text="couleur3" />
-            <TableColumn prefWidth="100.0" text="couleur4" />
-            <TableColumn prefWidth="100.0" text="noir" />
-            <TableColumn prefWidth="100.0" text="blanc" />
-            <TableColumn prefWidth="100.0" text="points" />
+          <TableColumn fx:id="userID_tc" prefWidth="100.0" text="userId" />
+          <TableColumn fx:id="essai_tc" prefWidth="100.0" text="essai" />
+            <TableColumn fx:id="couleur1_tc" prefWidth="100.0" text="couleur1" />
+            <TableColumn fx:id="couleur2_tc" prefWidth="100.0" text="couleur2" />
+            <TableColumn fx:id="couleur3_tc" prefWidth="100.0" text="couleur3" />
+            <TableColumn fx:id="couleur4_tc" prefWidth="100.0" text="couleur4" />
+            <TableColumn fx:id="noir_tc" prefWidth="100.0" text="noir" />
+            <TableColumn fx:id="blanc_tc" prefWidth="100.0" text="blanc" />
+            <TableColumn fx:id="points_tc" prefWidth="100.0" text="points" />
         </columns>
       </TableView>
    </center>
