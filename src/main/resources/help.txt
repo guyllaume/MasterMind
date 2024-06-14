@@ -1,0 +1,20 @@
+But du jeu :
+Le but est de découvrir la combinaison de couleurs cachée par l’ordinateur. Pour cela, il faut faire
+plusieurs essais pour choisir au fur et à mesure les bonnes couleurs et trouver leur place. L'ordinateur
+adversaire me donne des indices pour savoir si je mets les bonnes couleurs et si elles sont à la bonne
+place.  il indique à chaque tour le nombre de bonnes couleurs placées à la bonne place pion noir et 
+le nombre de bonnes couleurs à la mauvaise position un pion blanc
+
+Déroulement du jeu :
+L'ordinateur choisi 4 couleurs au hasard
+pour chacun des tours (maximum de 12)
+vous devez proposer 4 couleurs afin de trouver la combinaison généré
+pour chacune des couleurs trouvées et à la bonne place un pion noir sera indiqué. 
+Pour chacune des couleurs trouvées à la mauvaise position un pion blanc est indiqué
+le nombre de points est calculé pour chacune des lignes.
+à chaque nouvelle partie on a 5 points
+pour chacun des tours on ajoute 2 points par pions noires et 1 point par pion blanc et on soustrait un point
+
+Fin du jeu :
+Le jeu s’arrête quand vous avez trouvé la combinaison dans cas un bonus de 10 points est alloué. 
+Si le nombre de coup restant est 0 et que la solution n'a pas été trouvé vous perdez.
