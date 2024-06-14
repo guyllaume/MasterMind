@@ -11,6 +11,7 @@ public class GameMaster {
     private int nbWhite;
     private int nbBlack;
     private int nbPoints;
+    private int nbPointsGagnésParEssai;
     private boolean GameWon;
 
     public GameMaster() {
@@ -49,28 +50,32 @@ public class GameMaster {
         }
     }
     public void nouvelleEssai(Color[] colors) {
-        nbWhite = 0;
-        nbBlack = 0;
         if (colors.length != 4) {
             throw new IllegalArgumentException("Le tableau doit contenir 4 couleurs");
         }
+        nbWhite = 0;
+        nbBlack = 0;
+        nbPointsGagnésParEssai = 0;
         nbEssai++;
-        boolean indexAlreadyChecked[] = {false, false, false, false};
+        boolean indexAlreadyCheckedJ[] = {false, false, false, false};
+        boolean indexAlreadyCheckedI[] = {false, false, false, false};
         for (int i = 0; i < colors.length; i++) {
+            if (this.colors[i] == colors[i]){ nbBlack++; indexAlreadyCheckedJ[i] = true; indexAlreadyCheckedI[i] = true;}
+        }
+        for (int i = 0; i < colors.length; i++) {
+            if (indexAlreadyCheckedI[i]) { continue; }
             for (int j = 0; j < colors.length; j++) {
-                if (this.colors[i] == colors[i]){ nbBlack++; break;}
-                if (indexAlreadyChecked[j]) { continue; }
+                if (indexAlreadyCheckedJ[j]) { continue; }
                 if (this.colors[i] == colors[j] && i != j){
-                    indexAlreadyChecked[j] = true;
+                    indexAlreadyCheckedJ[j] = true;
                     nbWhite++;
                     break;
                 }
             }
         }
-        nbPoints = nbPoints - 1 + nbWhite+ (nbBlack * 2);
-        if (nbBlack == 4) {
-            GameWon = true;
-        }
+        nbPoints = nbPoints - 1 + nbWhite + nbBlack * 2;
+        nbPointsGagnésParEssai = nbWhite + nbBlack * 2;
+        if (nbBlack == 4) { GameWon = true;}
     }
 
     public Color[] getColors() {
@@ -99,6 +104,13 @@ public class GameMaster {
     }
 
     public boolean isGameWon() {
+        if (GameWon) {
+            nbPoints += 10;
+        }
         return GameWon;
+    }
+
+    public int getNbPointsGagnésParEssai() {
+        return nbPointsGagnésParEssai;
     }
 }

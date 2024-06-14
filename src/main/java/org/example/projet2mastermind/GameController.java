@@ -3,10 +3,7 @@ package org.example.projet2mastermind;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -15,6 +12,8 @@ import javafx.scene.shape.Circle;
 public class GameController {
     private Main mainApp;
     private Scene gameScene;
+    @FXML
+    private Label nickname_lbl;
     @FXML
     private Button validerChoix_btn;
     @FXML
@@ -56,6 +55,9 @@ public class GameController {
             setHoverCursor(cercle);
             setClickCircle(cercle);
         }
+    }
+    public void setNickname(){
+        nickname_lbl.setText(mainApp.getUsager().getNick());
     }
     public void setGameScene(Scene gameScene) {
         this.gameScene = gameScene;
@@ -110,18 +112,24 @@ public class GameController {
         affichageEssai_txa.setText(affichageEssai_txa.getText() + "Essai " + gameMaster.getNbEssai() + " " +
                 nomCouleur[0] + " " + nomCouleur[1] + " " + nomCouleur[2] + " " + nomCouleur[3] +
                 " Noir:" + gameMaster.getBlack() + " Blanc:" + gameMaster.getWhite() + " Points:" + gameMaster.getNbPoints() + "\n");
-        affichageEssai_txa.setScrollTop(Double.MAX_VALUE);
+        affichageLog_txa.setText(affichageLog_txa.getText() + "Vous perdez 1 point(s) pour la ligne" + gameMaster.getNbEssai() +
+                " et gagnez " + gameMaster.getNbPointsGagnésParEssai() + "point(s) Total de point(s):" + gameMaster.getNbPoints() + "\n" +
+                "Il reste " + gameMaster.getNbEssaiRestants() + " coups\n");
+
+        if (gameMaster.isGameWon()){
+            affichageEssai_txa.setText(affichageEssai_txa.getText() + " Points pour la résolution:" + gameMaster.getNbPoints());
+            affichageLog_txa.setText(affichageLog_txa.getText() + "Vous avez 10 point(s) pour la résolution et vous gagnez avec " + gameMaster.getNbPoints() + " point(s)\n");
+            disableGame();
+        }
         if (gameMaster.isGameLost()){
             nomCouleur = getNomCouleur(gameMaster.getColors());
             affichageEssai_txa.setText(affichageEssai_txa.getText() + "Voici la combinaison secrète:" + nomCouleur[0] + " " + nomCouleur[1] + " " + nomCouleur[2] + " " + nomCouleur[3]);
-            affichageEssai_txa.setScrollTop(Double.MAX_VALUE);
+            affichageLog_txa.setText(affichageLog_txa.getText() + "Vous avez perdu et vous gagnez 0 point(s)\n");
             disableGame();
         }
-        if (gameMaster.isGameWon()){
-            affichageEssai_txa.setText(affichageEssai_txa.getText() + " Points pour la résolution:" + gameMaster.getNbPoints());
-            affichageEssai_txa.setScrollTop(Double.MAX_VALUE);
-            disableGame();
-        }
+
+        affichageEssai_txa.setScrollTop(Double.MAX_VALUE);
+        affichageLog_txa.setScrollTop(Double.MAX_VALUE);
         resetCerclesChoisis();
     }
     public String[] getNomCouleur(Color[] couleursChoisies){
