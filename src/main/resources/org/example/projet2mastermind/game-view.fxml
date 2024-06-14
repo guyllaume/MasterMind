@@ -18,9 +18,9 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="794.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.projet2mastermind.GameController">
    <children>
-      <VBox prefHeight="400.0" prefWidth="794.0">
+      <VBox prefHeight="400.0" prefWidth="794.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <MenuBar>
+            <MenuBar VBox.vgrow="ALWAYS">
               <menus>
                 <Menu mnemonicParsing="false" text="Partie">
                   <items>
@@ -29,7 +29,7 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Statistiques">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Voir Ctrl+V" />
+                    <MenuItem mnemonicParsing="false" onAction="#openStatsStageEvent" text="Voir Ctrl+V" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Aide">
@@ -39,11 +39,11 @@
                 </Menu>
               </menus>
             </MenuBar>
-            <GridPane gridLinesVisible="true" prefHeight="173.0" prefWidth="794.0">
+            <GridPane gridLinesVisible="true" prefHeight="253.0" prefWidth="794.0" VBox.vgrow="ALWAYS">
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="376.0" minWidth="10.0" prefWidth="376.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="272.0" minWidth="10.0" prefWidth="165.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="253.0" minWidth="10.0" prefWidth="253.0" />
+                <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="376.0" />
+                <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="165.0" />
+                  <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="253.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -117,7 +117,7 @@
                   <TextArea fx:id="affichageEssai_txa" editable="false" prefHeight="200.0" prefWidth="200.0" wrapText="true" GridPane.rowIndex="1" />
                </children>
             </GridPane>
-            <TextArea fx:id="affichageLog_txa" editable="false" prefHeight="200.0" prefWidth="200.0">
+            <TextArea fx:id="affichageLog_txa" editable="false" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                <VBox.margin>
                   <Insets />
                </VBox.margin>

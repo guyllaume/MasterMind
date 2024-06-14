@@ -20,6 +20,7 @@ public class Main extends Application {
     private Scene gameScene;
     private LoginController loginController;
     private GameController gameController;
+    private StatsController statsController;
     private UsagerModel usager;
     @Override
     public void start(Stage mainStage) throws IOException {
@@ -50,9 +51,9 @@ public class Main extends Application {
         gameController.setMainApp(this);
         gameController.setGameScene(gameScene);
 
-        //Chargement du controller stats pour le statsStage (TODO)
-        /*loginController = fxmlLoaderLogin.getController();
-        loginController.setMainApp(this);*/
+        //Chargement du controller stats pour le statsStage
+        statsController = fxmlLoaderStats.getController();
+        statsController.setMainApp(this);
 
         //MainStage settings
         mainStage.setTitle("Login");
@@ -90,6 +91,7 @@ public class Main extends Application {
     }
     public void showStatsStage() {
         statsStage.show();
+        statsController.loadStats();
     }
     public void hideStatsStage() {
         statsStage.hide();

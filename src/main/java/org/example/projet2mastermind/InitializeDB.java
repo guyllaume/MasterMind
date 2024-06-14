@@ -87,7 +87,6 @@ public class InitializeDB {
                     "  `points` INT NOT NULL,\n" +
                     "  PRIMARY KEY (`idstats`),\n" +
                     "  UNIQUE INDEX `idstats_UNIQUE` (`idstats` ASC) VISIBLE,\n" +
-                    "  UNIQUE INDEX `userId_UNIQUE` (`userId` ASC) VISIBLE,\n" +
                     "  CONSTRAINT `usagerid`\n" +
                     "    FOREIGN KEY (`userId`)\n" +
                     "    REFERENCES `tp2`.`usager` (`idusager`)\n" +
