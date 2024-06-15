@@ -5,7 +5,6 @@ import javafx.scene.paint.Color;
 import static javafx.scene.paint.Color.*;
 
 public class StatsModel {
-    private int id;
     private int userId;
     private String essai;
     private String couleur1;
@@ -17,6 +16,7 @@ public class StatsModel {
     private int blanc;
     private int points;
 
+    //Constructeur pour le controlleur
     public StatsModel(int userId,int essai, Color[] colors, int noir, int blanc, int points) {
         this.userId = userId;
         this.essai = String.valueOf(essai);
@@ -32,6 +32,7 @@ public class StatsModel {
             else if(colors[i] == PURPLE) couleurs[i] = "Mauve";
         }
     }
+    //Constructeur pour la table Stats dans la DB
     public StatsModel(int userId,String essai, String couleur1, String couleur2, String couleur3, String couleur4, int noir, int blanc, int points) {
         this.userId = userId;
         this.essai = essai;
@@ -48,6 +49,7 @@ public class StatsModel {
         this.points = points;
     }
 
+    //Getters
     public int getBlanc() {
         return blanc;
     }
@@ -71,16 +73,9 @@ public class StatsModel {
     public String[] getCouleurs() {
         return couleurs;
     }
-    public String getCouleur1() {
-        return couleur1;
-    }
-    public String getCouleur2() {
-        return couleur2;
-    }
-    public String getCouleur3() {
-        return couleur3;
-    }
-    public String getCouleur4() {
-        return couleur4;
-    }
+    //On un usage avec le tableView meme s'ils ne sont pas appeller directement
+    public String getCouleur1() { return couleur1;}
+    public String getCouleur2() {return couleur2;}
+    public String getCouleur3() {return couleur3;}
+    public String getCouleur4() {return couleur4;}
 }

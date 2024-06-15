@@ -33,6 +33,8 @@ public class StatsController {
     private TableColumn<StatsModel, Integer> points_tc;
 
     public void loadStats() {
+        // Définir les CellValueFactory pour chaque colonne du tableau
+        // Cela indique quelle propriété de l'objet StatsModel doit être affichée dans chaque colonne
         userID_tc.setCellValueFactory(new PropertyValueFactory<>("userId"));
         essai_tc.setCellValueFactory(new PropertyValueFactory<>("essai"));
         couleur1_tc.setCellValueFactory(new PropertyValueFactory<>("couleur1"));
@@ -42,11 +44,22 @@ public class StatsController {
         noir_tc.setCellValueFactory(new PropertyValueFactory<>("noir"));
         blanc_tc.setCellValueFactory(new PropertyValueFactory<>("blanc"));
         points_tc.setCellValueFactory(new PropertyValueFactory<>("points"));
+
+        // Charger les stats
+        // Créer une nouvelle instance de StatsDAO
         StatsDAO statsDAO = new StatsDAO();
+
+        // Charger les stats pour l'utilisateur connecté
         List<StatsModel> stats = statsDAO.loadStatsModel(mainApp.getUsager().getId());
+
+        // Convertir la liste de StatsModel en ObservableList
         ObservableList<StatsModel> observableList = FXCollections.observableArrayList(stats);
+
+        // Afficher les stats dans le tableau
         statsTable.setItems(observableList);
     }
+
+    // Setter du MainApp pour charger l'usager connecté
     public void setMainApp(Main mainApp) {
         this.mainApp = mainApp;
     }

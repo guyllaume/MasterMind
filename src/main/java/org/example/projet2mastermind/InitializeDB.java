@@ -7,20 +7,24 @@ public class InitializeDB {
     private static final String DB_USER = "root";
     private static final String DB_PASSWORD = "jnmpdtdmj13!";
 
+    //Connection a la DB - utilisé par les DAO
     public static Connection getConnection() throws SQLException, ClassNotFoundException {
         Class.forName("com.mysql.cj.jdbc.Driver");
         return DriverManager.getConnection(DB_URL + DB_NAME, DB_USER, DB_PASSWORD);
     }
 
+    //Initialisation de la DB - utilisé par le Main a la lancé du programme
     public static void initializeConnection() throws SQLException {
         Connection connection = null;
         Statement statement = null;
         try {
+            // Charger la classe du driver MySQL
             Class.forName("com.mysql.cj.jdbc.Driver");
+            // Établir la connexion à la base de données
             connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
 
             //Create DB if not exists
-            statement = connection.createStatement();
+            statement = connection.createStatement(); // Creation d'un objet Statement pour executer des requêtes
             statement.executeUpdate("CREATE DATABASE IF NOT EXISTS " + DB_NAME);
             System.out.println("DB "+ DB_NAME +" créé ou deja existante");
 
@@ -30,17 +34,18 @@ public class InitializeDB {
             //Create Table stats if not exists
             createTableStats(connection);
 
+            // Fermer l'objet Statement et la connexion à la base de données
+            statement.close();
+            connection.close();
+
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
-        } finally {
-            close(connection, statement);
         }
     }
 
+    //Creation de la table usager et insertion des valeurs par defaut - appelé par initializeConnection
     private static void createTableUsager(Connection connection){
-        Statement statement = null;
-        try {
-            statement = connection.createStatement();
+        try (Statement statement = connection.createStatement()){
             String createUsagerTable = "CREATE TABLE IF NOT EXISTS `tp2`.`usager` (\n" +
                     "  `idusager` INT NOT NULL AUTO_INCREMENT,\n" +
                     "  `nomusager` VARCHAR(45) NOT NULL,\n" +
@@ -66,14 +71,12 @@ public class InitializeDB {
             System.out.println("Table usager créé ou deja existante");
         }catch (SQLException e){
             e.printStackTrace();
-        }finally {
-            closeStatement(statement);
         }
     }
+
+    //Creation de la table stats - appelé par initializeConnection
     private static void createTableStats(Connection connection){
-        Statement statement = null;
-        try {
-            statement = connection.createStatement();
+        try (Statement statement = connection.createStatement()){
             String createStatsTable = "CREATE TABLE IF NOT EXISTS `tp2`.`stats` (\n" +
                     "  `idstats` INT NOT NULL AUTO_INCREMENT,\n" +
                     "  `userId` INT NOT NULL,\n" +
@@ -96,35 +99,6 @@ public class InitializeDB {
             System.out.println("Table stats créé ou deja existante");
         }catch (SQLException e){
             e.printStackTrace();
-        }finally {
-            closeStatement(statement);
-        }
-    }
-
-    public static void close(Connection connection, Statement statement) {
-        if (statement != null) {
-            try {
-                statement.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        if (connection != null) {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    public static void closeStatement(Statement statement){
-        if (statement != null) {
-            try {
-                statement.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
     }
 }

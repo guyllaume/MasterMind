@@ -70,33 +70,27 @@ public class Main extends Application {
         statsStage.setTitle("Stats");
         statsStage.setScene(statsScene);
     }
+    public void switchToGameScene() {
+        mainStage.setScene(gameScene);
+        mainStage.setTitle("MasterMind");
+        gameController.setNickname();
+    }
+    //Getter and Setter pour l'usager connecté
     public UsagerModel getUsager() {
         return usager;
     }
     public void setUsager(UsagerModel usager) {
         this.usager = usager;
     }
-
-    public void switchToGameScene() {
-        mainStage.setScene(gameScene);
-        mainStage.setTitle("MasterMind");
-        gameController.setNickname();
-    }
-
+    //Méthode pour afficher le Help Stage
     public void showHelpStage() {
         helpStage.show();
     }
-    public void hideHelpStage() {
-        helpStage.hide();
-    }
+    //Méthode pour afficher le Help Stats
     public void showStatsStage() {
         statsStage.show();
-        statsController.loadStats();
+        statsController.loadStats(); //Get toutes les stats de l'usager connecté de la DB
     }
-    public void hideStatsStage() {
-        statsStage.hide();
-    }
-
     public static void main(String[] args) {
         launch();
     }
